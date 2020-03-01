@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
 //        let viewController = ImageClassificationViewController()
 //        let viewController = CaptureClassificationViewController()
-        let viewController = TextClassificationViewController()
+//        let viewController = TextClassificationViewController()
+        let viewController = MainViewController()
         let navigationController = UINavigationController(rootViewController: viewController)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

@@ -20,6 +20,7 @@
 		6564D02C239D29D300DA5B5C /* CaptureClassificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6564D02B239D29D300DA5B5C /* CaptureClassificationViewController.swift */; };
 		6564D02E239D2F5000DA5B5C /* TextClassification.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6564D02D239D2F4F00DA5B5C /* TextClassification.mlmodel */; };
 		6564D030239D2F6000DA5B5C /* TextClassificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6564D02F239D2F6000DA5B5C /* TextClassificationViewController.swift */; };
+		65B38013240BE0A50086136E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B38012240BE0A50086136E /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		6564D02B239D29D300DA5B5C /* CaptureClassificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureClassificationViewController.swift; sourceTree = "<group>"; };
 		6564D02D239D2F4F00DA5B5C /* TextClassification.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassification.mlmodel; sourceTree = "<group>"; };
 		6564D02F239D2F6000DA5B5C /* TextClassificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextClassificationViewController.swift; sourceTree = "<group>"; };
+		65B38012240BE0A50086136E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				6564D02B239D29D300DA5B5C /* CaptureClassificationViewController.swift */,
 				6564D02D239D2F4F00DA5B5C /* TextClassification.mlmodel */,
 				6564D02F239D2F6000DA5B5C /* TextClassificationViewController.swift */,
+				65B38012240BE0A50086136E /* MainViewController.swift */,
 			);
 			path = MLDemo;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				6564D02E239D2F5000DA5B5C /* TextClassification.mlmodel in Sources */,
 				6564CFF9239D1E9100DA5B5C /* ViewController.swift in Sources */,
 				6564D02C239D29D300DA5B5C /* CaptureClassificationViewController.swift in Sources */,
+				65B38013240BE0A50086136E /* MainViewController.swift in Sources */,
 				6564D02A239D204900DA5B5C /* ImageClassification.mlmodel in Sources */,
 				6564CFF7239D1E9100DA5B5C /* AppDelegate.swift in Sources */,
 			);
@@ -456,7 +460,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G62233X968;
 				INFOPLIST_FILE = MLDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
@@ -466,6 +470,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cracktheterm.MLDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = MLDemo_dev;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -475,7 +480,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = G62233X968;
 				INFOPLIST_FILE = MLDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
@@ -485,6 +490,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.cracktheterm.MLDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = MLDemo_dev;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
