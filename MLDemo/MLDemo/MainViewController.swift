@@ -81,6 +81,12 @@ class MainViewController: UITableViewController {
         case .captureClassification:
             viewController = CaptureClassificationViewController()
 
+        case .imageSimilarity:
+            viewController = ImageSimilarityViewController()
+
+        case .objectDetection:
+            viewController = ObjectDetectionViewController()
+
         case .textClassification:
             viewController = TextClassificationViewController()
 

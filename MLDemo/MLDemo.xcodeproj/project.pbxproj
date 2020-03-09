@@ -20,6 +20,10 @@
 		6564D02C239D29D300DA5B5C /* CaptureClassificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6564D02B239D29D300DA5B5C /* CaptureClassificationViewController.swift */; };
 		6564D02E239D2F5000DA5B5C /* TextClassification.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6564D02D239D2F4F00DA5B5C /* TextClassification.mlmodel */; };
 		6564D030239D2F6000DA5B5C /* TextClassificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6564D02F239D2F6000DA5B5C /* TextClassificationViewController.swift */; };
+		657267342415279900122344 /* ImageSimilarityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657267332415279900122344 /* ImageSimilarityViewController.swift */; };
+		6572673624152A3D00122344 /* ObjectDetection.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 6572673524152A3D00122344 /* ObjectDetection.mlmodel */; };
+		6572673824152A7C00122344 /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6572673724152A7C00122344 /* ObjectDetectionViewController.swift */; };
+		6572673A24152B0000122344 /* DrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6572673924152B0000122344 /* DrawView.swift */; };
 		65B38013240BE0A50086136E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B38012240BE0A50086136E /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +64,10 @@
 		6564D02B239D29D300DA5B5C /* CaptureClassificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureClassificationViewController.swift; sourceTree = "<group>"; };
 		6564D02D239D2F4F00DA5B5C /* TextClassification.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = TextClassification.mlmodel; sourceTree = "<group>"; };
 		6564D02F239D2F6000DA5B5C /* TextClassificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextClassificationViewController.swift; sourceTree = "<group>"; };
+		657267332415279900122344 /* ImageSimilarityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSimilarityViewController.swift; sourceTree = "<group>"; };
+		6572673524152A3D00122344 /* ObjectDetection.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ObjectDetection.mlmodel; sourceTree = "<group>"; };
+		6572673724152A7C00122344 /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
+		6572673924152B0000122344 /* DrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawView.swift; sourceTree = "<group>"; };
 		65B38012240BE0A50086136E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,19 +119,23 @@
 		6564CFF5239D1E9100DA5B5C /* MLDemo */ = {
 			isa = PBXGroup;
 			children = (
+				6564D029239D204900DA5B5C /* ImageClassification.mlmodel */,
+				6572673524152A3D00122344 /* ObjectDetection.mlmodel */,
+				6564D02D239D2F4F00DA5B5C /* TextClassification.mlmodel */,
+				6564D005239D1E9300DA5B5C /* Info.plist */,
 				6564CFF6239D1E9100DA5B5C /* AppDelegate.swift */,
+				6564D02B239D29D300DA5B5C /* CaptureClassificationViewController.swift */,
+				6564D027239D1F2F00DA5B5C /* ImageClassificationViewController.swift */,
+				657267332415279900122344 /* ImageSimilarityViewController.swift */,
+				65B38012240BE0A50086136E /* MainViewController.swift */,
+				6572673724152A7C00122344 /* ObjectDetectionViewController.swift */,
+				6564D02F239D2F6000DA5B5C /* TextClassificationViewController.swift */,
 				6564CFF8239D1E9100DA5B5C /* ViewController.swift */,
-				6564CFFA239D1E9100DA5B5C /* Main.storyboard */,
 				6564D000239D1E9200DA5B5C /* Assets.xcassets */,
 				6564D002239D1E9200DA5B5C /* LaunchScreen.storyboard */,
-				6564D005239D1E9300DA5B5C /* Info.plist */,
+				6564CFFA239D1E9100DA5B5C /* Main.storyboard */,
 				6564CFFD239D1E9100DA5B5C /* MLDemo.xcdatamodeld */,
-				6564D027239D1F2F00DA5B5C /* ImageClassificationViewController.swift */,
-				6564D029239D204900DA5B5C /* ImageClassification.mlmodel */,
-				6564D02B239D29D300DA5B5C /* CaptureClassificationViewController.swift */,
-				6564D02D239D2F4F00DA5B5C /* TextClassification.mlmodel */,
-				6564D02F239D2F6000DA5B5C /* TextClassificationViewController.swift */,
-				65B38012240BE0A50086136E /* MainViewController.swift */,
+				6572673924152B0000122344 /* DrawView.swift */,
 			);
 			path = MLDemo;
 			sourceTree = "<group>";
@@ -277,6 +289,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				657267342415279900122344 /* ImageSimilarityViewController.swift in Sources */,
+				6572673824152A7C00122344 /* ObjectDetectionViewController.swift in Sources */,
+				6572673A24152B0000122344 /* DrawView.swift in Sources */,
+				6572673624152A3D00122344 /* ObjectDetection.mlmodel in Sources */,
 				6564D028239D1F2F00DA5B5C /* ImageClassificationViewController.swift in Sources */,
 				6564D030239D2F6000DA5B5C /* TextClassificationViewController.swift in Sources */,
 				6564CFFF239D1E9100DA5B5C /* MLDemo.xcdatamodeld in Sources */,
