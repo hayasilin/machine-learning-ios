@@ -87,6 +87,9 @@ class MainViewController: UITableViewController {
         case .objectDetection:
             viewController = ObjectDetectionViewController()
 
+        case .styleTransfer:
+            viewController = StyleTransferViewController()
+
         case .textClassification:
             viewController = TextClassificationViewController()
 
