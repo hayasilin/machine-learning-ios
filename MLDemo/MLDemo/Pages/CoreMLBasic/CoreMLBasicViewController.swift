@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UITableViewController {
+class CoreMLBasicViewController: UITableViewController {
 
     enum SettingsFunctions {
         case imageClassication
