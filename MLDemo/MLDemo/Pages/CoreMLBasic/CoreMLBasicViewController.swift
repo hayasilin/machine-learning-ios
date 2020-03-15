@@ -46,7 +46,7 @@ class CoreMLBasicViewController: UITableViewController {
         .objectDetection,
         .styleTransfer,
         .activityClassification,
-        .textClassification
+        .textClassification,
     ]
 
     override func viewDidLoad() {
@@ -90,11 +90,11 @@ class CoreMLBasicViewController: UITableViewController {
         case .styleTransfer:
             viewController = StyleTransferViewController()
 
+        case .activityClassification:
+            viewController = ActivityClassificationViewController()
+
         case .textClassification:
             viewController = TextClassificationViewController()
-
-        default:
-            break
         }
 
         navigationController?.pushViewController(viewController, animated: true)
