@@ -87,7 +87,7 @@ enum SettingsFunctions {
             viewController = ObjectTrackingViewController()
 
         case .naturalLanguage:
-            viewController = TextClassificationViewController()
+            viewController = NaturalLanguageViewController()
         }
 
         navigationController?.pushViewController(viewController, animated: true)
