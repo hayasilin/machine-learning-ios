@@ -1,16 +1,17 @@
 //
-//  ImageClassificationViewController.swift
+//  HorizonDetectionViewController.swift
 //  MLDemo
 //
-//  Created by KuanWei on 2019/12/8.
-//  Copyright © 2019 Cracktheterm. All rights reserved.
+//  Created by KuanWei on 2020/3/15.
+//  Copyright © 2020 Cracktheterm. All rights reserved.
 //
 
 import UIKit
 import CoreML
 import Vision
 
-class ImageClassificationViewController: UIViewController {
+class HorizonDetectionViewController: UIViewController, UINavigationControllerDelegate,
+UIImagePickerControllerDelegate, UIGestureRecognizerDelegate {
 
     lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -24,20 +25,18 @@ class ImageClassificationViewController: UIViewController {
         return label
     }()
 
-    var model = try! VNCoreMLModel(for: ImageClassification().model)
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureViews()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
 
         if self.imageView.image == nil {
             showActionSheet()
         }
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        showActionSheet()
     }
 
     func configureViews() {
@@ -64,7 +63,7 @@ class ImageClassificationViewController: UIViewController {
 
     @objc func showActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil,
-                                            preferredStyle: .actionSheet)
+            preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "カメラ", style: .default) {
             action in
             self.openPicker(sourceType: .camera)
@@ -79,12 +78,17 @@ class ImageClassificationViewController: UIViewController {
 
     func showAlert(_ text: String!) {
         let alert = UIAlertController(title: text, message: nil,
-                                      preferredStyle: UIAlertController.Style.alert)
+            preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK",
-                                      style: UIAlertAction.Style.default, handler: nil))
+            style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
+
+//====================
+//イメージピッカー
+//====================
+    //イメージピッカーのオープン
     func openPicker(sourceType: UIImagePickerController.SourceType) {
         let picker = UIImagePickerController()
         picker.sourceType = sourceType
@@ -92,52 +96,9 @@ class ImageClassificationViewController: UIViewController {
         self.present(picker, animated: true, completion: nil)
     }
 
-    func predict(_ image: UIImage) {
-        DispatchQueue.global(qos: .default).async {
-            let request = VNCoreMLRequest(model: self.model) {
-                request, error in
-                if error != nil {
-                    self.showAlert(error!.localizedDescription)
-                    return
-                }
-
-                //検出結果の取得
-                let observations = request.results as! [VNClassificationObservation]
-                var text: String = "\n"
-                for i in 0..<min(3, observations.count) { //上位3件
-                    let probabillity = Int(observations[i].confidence*100) //信頼度
-                    let label = observations[i].identifier //ラベル
-                    text += "\(label) : \(probabillity)%\n"
-                }
-
-                //UIの更新
-                DispatchQueue.main.async {
-                    self.resultLabel.text = text
-                }
-            }
-
-            //入力画像のリサイズ指定
-            request.imageCropAndScaleOption = .centerCrop
-
-            //UIImageをCIImageに変換
-            let ciImage = CIImage(image: image)!
-
-            //画像の向きの取得
-            let orientation = CGImagePropertyOrientation(
-                rawValue: UInt32(image.imageOrientation.rawValue))!
-
-            //ハンドラの生成と実行
-            let handler = VNImageRequestHandler(
-                ciImage: ciImage, orientation: orientation)
-            guard (try? handler.perform([request])) != nil else {return}
-        }
-    }
-}
-
-extension ImageClassificationViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIGestureRecognizerDelegate {
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
+    //イメージピッカーのイメージ取得時に呼ばれる
+    func imagePickerController(_ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         //イメージの取得
         var image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
 
@@ -152,14 +113,62 @@ extension ImageClassificationViewController: UINavigationControllerDelegate, UII
         self.imageView.image = image
 
         //クローズ
-        picker.presentingViewController!.dismiss(animated:true, completion:nil);
+        picker.presentingViewController!.dismiss(animated:true, completion:nil)
 
         //予測
-        predict(image);
+        predict(image)
     }
 
+    //イメージピッカーのキャンセル時に呼ばれる
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         //クローズ
         picker.presentingViewController!.dismiss(animated:true, completion:nil)
+    }
+
+
+//====================
+//水平線検出
+//====================
+    //(1)予測
+    func predict(_ image: UIImage) {
+        DispatchQueue.global(qos: .default).async {
+            //リクエストの生成
+            let request = VNDetectHorizonRequest {
+                request, error in
+                //エラー処理
+                if error != nil {
+                    self.showAlert(error!.localizedDescription)
+                    return
+                }
+
+               DispatchQueue.main.async {
+                    //検出結果の取得
+                    let horizons = request.results as! [VNHorizonObservation]
+
+                    //UIの更新
+                    if horizons.first == nil {
+                        self.imageView.transform = CGAffineTransform(rotationAngle: 0)
+                        self.resultLabel.text = "検出失敗"
+                    } else {
+                        let angle = horizons.first!.angle
+                        self.imageView.transform = CGAffineTransform(rotationAngle: -angle)
+                        self.resultLabel.text = String(format:"\nAngle : %.2f度\n",
+                            -angle*180/CGFloat(Double.pi))
+                    }
+                }
+            }
+
+            //UIImageをCIImageに変換
+            guard let ciImage = CIImage(image: image) else {return}
+
+            //画像の向きの取得
+            let orientation = CGImagePropertyOrientation(
+                rawValue: UInt32(image.imageOrientation.rawValue))!
+
+            //ハンドラの生成と実行
+            let handler = VNImageRequestHandler(
+                ciImage: ciImage, orientation: orientation)
+            guard (try? handler.perform([request])) != nil else {return}
+        }
     }
 }

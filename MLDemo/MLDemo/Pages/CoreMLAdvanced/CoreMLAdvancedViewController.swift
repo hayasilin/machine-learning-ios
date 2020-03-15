@@ -81,7 +81,7 @@ enum SettingsFunctions {
             viewController = TextDetectionViewController()
 
         case .horizonDetection:
-            viewController = ObjectDetectionViewController()
+            viewController = HorizonDetectionViewController()
 
         case .objectTracking:
             viewController = StyleTransferViewController()
