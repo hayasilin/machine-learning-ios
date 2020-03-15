@@ -75,7 +75,7 @@ enum SettingsFunctions {
             viewController = FaceDetectionViewController()
 
         case .barcodeDetection:
-            viewController = CaptureClassificationViewController()
+            viewController = BarcodeDetectionViewController()
 
         case .textDetection:
             viewController = ImageSimilarityViewController()
