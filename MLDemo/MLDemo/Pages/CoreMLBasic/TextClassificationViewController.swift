@@ -25,6 +25,13 @@ class TextClassificationViewController: UIViewController {
         return label
     }()
 
+    lazy var segmentedControl: UISegmentedControl = {
+        let items = ["スポーツ", "ITライフハック"]
+        let segmentedControl = UISegmentedControl(items: items)
+        segmentedControl.selectedSegmentIndex = 0
+        return segmentedControl
+    }()
+
     let model = TextClassification()
 
     override func viewDidLoad() {
@@ -40,6 +47,15 @@ class TextClassificationViewController: UIViewController {
     func configureViews() {
         view.backgroundColor = .white
 
+        segmentedControl.addTarget(self, action: #selector(didChangeSegmentedControl), for: .valueChanged)
+        view.addSubview(segmentedControl)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
+        ])
+
         textView.layer.borderColor = UIColor.black.cgColor
         textView.layer.borderWidth = 1.0
         textView.layer.cornerRadius = 8.0
@@ -48,11 +64,11 @@ class TextClassificationViewController: UIViewController {
         view.addSubview(textView)
 
         NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            textView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 8),
             textView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
             textView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
-            textView.heightAnchor.constraint(equalToConstant: 300)
-            ])
+            textView.heightAnchor.constraint(equalToConstant: 200),
+        ])
 
         resultLabel.translatesAutoresizingMaskIntoConstraints = false
         resultLabel.numberOfLines = 0
@@ -61,12 +77,25 @@ class TextClassificationViewController: UIViewController {
         view.addSubview(resultLabel)
 
         NSLayoutConstraint.activate([
-            resultLabel.heightAnchor.constraint(equalToConstant: 100),
+            resultLabel.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 8),
             resultLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             resultLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             resultLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            ])
+        ])
     }
+
+    @objc
+    func didChangeSegmentedControl(_ sender: UISegmentedControl) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            textView.text = "大谷翔平は3月27日の楽天戦（札幌ドーム）で自身初の開幕投手を務め、5回2/3を被安打3、失点1、6奪三振に抑え勝利投手になった"
+        case 1:
+            textView.text = "オーイズミ・アミュージオは、農場シミュレーション『ファーミングシミュレーター 20』のNintendo Switch版を2020年5月28日（木）に発売すると発表した。"
+        default:
+            break
+        }
+    }
+
 
     func showAlert(_ text: String!) {
         let alert = UIAlertController(title: text, message: nil,
@@ -127,11 +156,6 @@ class TextClassificationViewController: UIViewController {
 }
 
 extension TextClassificationViewController: UITextViewDelegate {
-
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        textView.text = ""
-    }
-
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange,
                   replacementText text: String) -> Bool {
         if text == "\n" {

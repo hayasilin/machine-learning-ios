@@ -156,17 +156,17 @@
 		65096704241D291C000813BD /* CoreMLAdvanced */ = {
 			isa = PBXGroup;
 			children = (
-				65096700241D2832000813BD /* CoreMLAdvancedViewController.swift */,
-				65096705241D2AD2000813BD /* FaceDetectionViewController.swift */,
-				65096707241D2C0B000813BD /* FaceDetectionDrawView.swift */,
-				6509670D241DF08E000813BD /* BarcodeDetectionViewController.swift */,
 				6509670F241DF0C7000813BD /* BarcodeDetectionDrawView.swift */,
-				65096711241E0CAA000813BD /* TextDetectionViewController.swift */,
-				65096713241E0CBE000813BD /* TextDetectionDrawView.swift */,
+				6509670D241DF08E000813BD /* BarcodeDetectionViewController.swift */,
+				65096700241D2832000813BD /* CoreMLAdvancedViewController.swift */,
+				65096707241D2C0B000813BD /* FaceDetectionDrawView.swift */,
+				65096705241D2AD2000813BD /* FaceDetectionViewController.swift */,
 				65096715241E0E15000813BD /* HorizonDetectionViewController.swift */,
-				65096717241E1186000813BD /* ObjectTrackingViewController.swift */,
-				65096719241E1199000813BD /* ObjectTrackingDrawView.swift */,
 				6509671B241E1313000813BD /* NaturalLanguageViewController.swift */,
+				65096719241E1199000813BD /* ObjectTrackingDrawView.swift */,
+				65096717241E1186000813BD /* ObjectTrackingViewController.swift */,
+				65096713241E0CBE000813BD /* TextDetectionDrawView.swift */,
+				65096711241E0CAA000813BD /* TextDetectionViewController.swift */,
 			);
 			path = CoreMLAdvanced;
 			sourceTree = "<group>";
