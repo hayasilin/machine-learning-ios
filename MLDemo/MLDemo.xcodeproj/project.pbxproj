@@ -18,6 +18,8 @@
 		65096712241E0CAA000813BD /* TextDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65096711241E0CAA000813BD /* TextDetectionViewController.swift */; };
 		65096714241E0CBE000813BD /* TextDetectionDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65096713241E0CBE000813BD /* TextDetectionDrawView.swift */; };
 		65096716241E0E15000813BD /* HorizonDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65096715241E0E15000813BD /* HorizonDetectionViewController.swift */; };
+		65096718241E1186000813BD /* ObjectTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65096717241E1186000813BD /* ObjectTrackingViewController.swift */; };
+		6509671A241E1199000813BD /* ObjectTrackingDrawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65096719241E1199000813BD /* ObjectTrackingDrawView.swift */; };
 		6564CFF7239D1E9100DA5B5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6564CFF6239D1E9100DA5B5C /* AppDelegate.swift */; };
 		6564CFF9239D1E9100DA5B5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6564CFF8239D1E9100DA5B5C /* ViewController.swift */; };
 		6564CFFC239D1E9100DA5B5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6564CFFA239D1E9100DA5B5C /* Main.storyboard */; };
@@ -69,6 +71,8 @@
 		65096711241E0CAA000813BD /* TextDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDetectionViewController.swift; sourceTree = "<group>"; };
 		65096713241E0CBE000813BD /* TextDetectionDrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextDetectionDrawView.swift; sourceTree = "<group>"; };
 		65096715241E0E15000813BD /* HorizonDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizonDetectionViewController.swift; sourceTree = "<group>"; };
+		65096717241E1186000813BD /* ObjectTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTrackingViewController.swift; sourceTree = "<group>"; };
+		65096719241E1199000813BD /* ObjectTrackingDrawView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectTrackingDrawView.swift; sourceTree = "<group>"; };
 		6564CFF3239D1E9100DA5B5C /* MLDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6564CFF6239D1E9100DA5B5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6564CFF8239D1E9100DA5B5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				65096711241E0CAA000813BD /* TextDetectionViewController.swift */,
 				65096713241E0CBE000813BD /* TextDetectionDrawView.swift */,
 				65096715241E0E15000813BD /* HorizonDetectionViewController.swift */,
+				65096717241E1186000813BD /* ObjectTrackingViewController.swift */,
+				65096719241E1199000813BD /* ObjectTrackingDrawView.swift */,
 			);
 			path = CoreMLAdvanced;
 			sourceTree = "<group>";
@@ -370,8 +376,10 @@
 				6564D030239D2F6000DA5B5C /* TextClassificationViewController.swift in Sources */,
 				65096714241E0CBE000813BD /* TextDetectionDrawView.swift in Sources */,
 				6564CFFF239D1E9100DA5B5C /* MLDemo.xcdatamodeld in Sources */,
+				6509671A241E1199000813BD /* ObjectTrackingDrawView.swift in Sources */,
 				6564D02E239D2F5000DA5B5C /* TextClassification.mlmodel in Sources */,
 				650966FF241D272D000813BD /* MainTabBarController.swift in Sources */,
+				65096718241E1186000813BD /* ObjectTrackingViewController.swift in Sources */,
 				6564CFF9239D1E9100DA5B5C /* ViewController.swift in Sources */,
 				6564D02C239D29D300DA5B5C /* CaptureClassificationViewController.swift in Sources */,
 				65B38013240BE0A50086136E /* CoreMLBasicViewController.swift in Sources */,
