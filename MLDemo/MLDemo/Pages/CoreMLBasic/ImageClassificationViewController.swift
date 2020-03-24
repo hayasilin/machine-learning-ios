@@ -11,7 +11,6 @@ import CoreML
 import Vision
 
 class ImageClassificationViewController: UIViewController {
-
     lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFit
@@ -28,12 +27,7 @@ class ImageClassificationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureViews()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
 
         if self.imageView.image == nil {
             showActionSheet()
@@ -159,7 +153,6 @@ extension ImageClassificationViewController: UINavigationControllerDelegate, UII
     }
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        //クローズ
         picker.presentingViewController!.dismiss(animated:true, completion:nil)
     }
 }

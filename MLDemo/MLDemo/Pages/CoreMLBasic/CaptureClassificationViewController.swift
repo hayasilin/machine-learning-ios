@@ -29,8 +29,8 @@ class CaptureClassificationViewController: UIViewController, AVCaptureVideoDataO
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureViews()
+        startCapture()
     }
 
     func configureViews() {
@@ -51,11 +51,6 @@ class CaptureClassificationViewController: UIViewController, AVCaptureVideoDataO
             resultLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             resultLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        //カメラキャプチャの開始
-        startCapture()
     }
 
     func showAlert(_ text: String!) {
