@@ -12,7 +12,6 @@ import Vision
 import NaturalLanguage
 
 class TextClassificationViewController: UIViewController {
-
     lazy var textView: UITextView = {
         let textView = UITextView(frame: .zero)
         textView.delegate = self
@@ -36,7 +35,6 @@ class TextClassificationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureViews()
     }
 
@@ -51,9 +49,9 @@ class TextClassificationViewController: UIViewController {
         view.addSubview(segmentedControl)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
+            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
         ])
 
         textView.layer.borderColor = UIColor.black.cgColor
@@ -105,10 +103,7 @@ class TextClassificationViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-    //====================
-    //テキスト分類
-    //====================
-    //(2)予測
+    //予測
     func predict(_ text: String) {
         DispatchQueue.global(qos: .default).async {
             //テキストをBag-of-wordsに変換
@@ -127,7 +122,7 @@ class TextClassificationViewController: UIViewController {
         }
     }
 
-    //(3)テキストをBag-of-wordsに変換
+    //テキストをBag-of-wordsに変換
     func bagOfWords(_ text: String) -> [String: Double] {
         //結果変数の準備
         var bagOfWords = [String: Double]()

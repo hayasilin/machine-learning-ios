@@ -22,8 +22,8 @@ class TextDetectionDrawView: UIView {
         //画像の表示領域の計算（AspectFill）
         let scale: CGFloat =
             (self.frame.width/imageSize.width > self.frame.height/imageSize.height) ?
-            self.frame.width/imageSize.width :
-            self.frame.height/imageSize.height
+                self.frame.width/imageSize.width :
+                self.frame.height/imageSize.height
         let dw: CGFloat = imageSize.width*scale
         let dh: CGFloat = imageSize.height*scale
         self.imageRect = CGRect(
@@ -32,7 +32,7 @@ class TextDetectionDrawView: UIView {
             width: dw, height: dh)
     }
 
-    //(2)検出結果の描画
+    //検出結果の描画
     override func draw(_ rect: CGRect) {
         if self.texts == nil {return}
 

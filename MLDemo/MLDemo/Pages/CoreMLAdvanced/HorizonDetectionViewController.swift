@@ -27,7 +27,6 @@ UIImagePickerControllerDelegate, UIGestureRecognizerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureViews()
 
         if self.imageView.image == nil {
@@ -63,7 +62,7 @@ UIImagePickerControllerDelegate, UIGestureRecognizerDelegate {
 
     @objc func showActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil,
-            preferredStyle: .actionSheet)
+                                            preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "カメラ", style: .default) {
             action in
             self.openPicker(sourceType: .camera)
@@ -78,16 +77,12 @@ UIImagePickerControllerDelegate, UIGestureRecognizerDelegate {
 
     func showAlert(_ text: String!) {
         let alert = UIAlertController(title: text, message: nil,
-            preferredStyle: UIAlertController.Style.alert)
+                                      preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK",
-            style: UIAlertAction.Style.default, handler: nil))
+                                      style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
-
-//====================
-//イメージピッカー
-//====================
     //イメージピッカーのオープン
     func openPicker(sourceType: UIImagePickerController.SourceType) {
         let picker = UIImagePickerController()
@@ -98,7 +93,7 @@ UIImagePickerControllerDelegate, UIGestureRecognizerDelegate {
 
     //イメージピッカーのイメージ取得時に呼ばれる
     func imagePickerController(_ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         //イメージの取得
         var image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
 
@@ -125,11 +120,6 @@ UIImagePickerControllerDelegate, UIGestureRecognizerDelegate {
         picker.presentingViewController!.dismiss(animated:true, completion:nil)
     }
 
-
-//====================
-//水平線検出
-//====================
-    //(1)予測
     func predict(_ image: UIImage) {
         DispatchQueue.global(qos: .default).async {
             //リクエストの生成
@@ -141,7 +131,7 @@ UIImagePickerControllerDelegate, UIGestureRecognizerDelegate {
                     return
                 }
 
-               DispatchQueue.main.async {
+                DispatchQueue.main.async {
                     //検出結果の取得
                     let horizons = request.results as! [VNHorizonObservation]
 
@@ -153,7 +143,7 @@ UIImagePickerControllerDelegate, UIGestureRecognizerDelegate {
                         let angle = horizons.first!.angle
                         self.imageView.transform = CGAffineTransform(rotationAngle: -angle)
                         self.resultLabel.text = String(format:"\nAngle : %.2f度\n",
-                            -angle*180/CGFloat(Double.pi))
+                                                       -angle*180/CGFloat(Double.pi))
                     }
                 }
             }

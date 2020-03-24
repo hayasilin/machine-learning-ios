@@ -11,7 +11,6 @@ import AVFoundation
 import Vision
 
 class BarcodeDetectionViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
-
     lazy var drawView: BarcodeDetectionDrawView = {
         let view = BarcodeDetectionDrawView()
         return view
@@ -35,16 +34,12 @@ class BarcodeDetectionViewController: UIViewController, AVCaptureVideoDataOutput
     //アラートの表示
     func showAlert(_ text: String!) {
         let alert = UIAlertController(title: text, message: nil,
-            preferredStyle: UIAlertController.Style.alert)
+                                      preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK",
-            style: UIAlertAction.Style.default, handler: nil))
+                                      style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
-
-//====================
-//カメラキャプチャ
-//====================
     //カメラキャプチャの開始
     func startCapture() {
         //セッションの初期化
@@ -93,16 +88,11 @@ class BarcodeDetectionViewController: UIViewController, AVCaptureVideoDataOutput
 
     //カメラキャプチャの取得時に呼ばれる
     func captureOutput(_ output: AVCaptureOutput,
-        didOutput sampleBuffer: CMSampleBuffer,
-        from connection: AVCaptureConnection) {
+                       didOutput sampleBuffer: CMSampleBuffer,
+                       from connection: AVCaptureConnection) {
         predict(sampleBuffer)
     }
 
-
-//====================
-//バーコード検出
-//====================
-    //(1)予測
     func predict(_ sampleBuffer: CMSampleBuffer) {
         //リクエストの生成
         let request = VNDetectBarcodesRequest {

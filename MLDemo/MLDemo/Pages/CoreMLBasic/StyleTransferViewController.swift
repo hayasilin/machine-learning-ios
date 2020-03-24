@@ -37,7 +37,6 @@ class StyleTransferViewController: UIViewController, UINavigationControllerDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureViews()
     }
 
@@ -54,6 +53,9 @@ class StyleTransferViewController: UIViewController, UINavigationControllerDeleg
     }
 
     func configureViews() {
+        let cameraBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(showActionSheet))
+        navigationItem.rightBarButtonItem = cameraBarButtonItem
+
         view.backgroundColor = .white
         let frame = UIScreen.main.bounds
         segmentedControl.frame = CGRect(x: frame.minX + 10, y: frame.minY + 100, width: frame.width - 20, height: frame.height * 0.1)
@@ -78,8 +80,7 @@ class StyleTransferViewController: UIViewController, UINavigationControllerDeleg
         ])
     }
 
-    @objc
-    func didChangeSegmentedControl(_ sender: UISegmentedControl) {
+    @objc func didChangeSegmentedControl(_ sender: UISegmentedControl) {
         //予測
         self.imageView.image = self.image
         let index = self.segmentedControl.selectedSegmentIndex-1
@@ -88,9 +89,9 @@ class StyleTransferViewController: UIViewController, UINavigationControllerDeleg
         }
     }
 
-    func showActionSheet() {
+    @objc func showActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil,
-            preferredStyle: .actionSheet)
+                                            preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "カメラ", style: .default) {
             action in
             self.openPicker(sourceType: .camera)
@@ -105,22 +106,22 @@ class StyleTransferViewController: UIViewController, UINavigationControllerDeleg
 
     func showAlert(_ text: String!) {
         let alert = UIAlertController(title: text, message: nil,
-            preferredStyle: UIAlertController.Style.alert)
+                                      preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK",
-            style: UIAlertAction.Style.default, handler: nil))
+                                      style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
     func openPicker(sourceType: UIImagePickerController.SourceType) {
-            let picker = UIImagePickerController()
-            picker.sourceType = sourceType
-            picker.delegate = self
-            self.present(picker, animated: true, completion: nil)
-        }
+        let picker = UIImagePickerController()
+        picker.sourceType = sourceType
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
+    }
 
     //イメージピッカーのイメージ取得時に呼ばれる
     func imagePickerController(_ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         //イメージの取得
         var image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
 
@@ -149,11 +150,7 @@ class StyleTransferViewController: UIViewController, UINavigationControllerDeleg
         picker.presentingViewController!.dismiss(animated:true, completion:nil)
     }
 
-
-    //====================
-    //画風変換
-    //====================
-    //(2)予測
+    //予測
     func predict(_ image: UIImage, styleIndex: Int) {
         self.image = image
         self.segmentedControl.isEnabled = true
@@ -177,7 +174,7 @@ class StyleTransferViewController: UIViewController, UINavigationControllerDeleg
         }
     }
 
-    //(3)画風変換の実行
+    //画風変換の実行
     func stylizeImage(image: UIImage, styleArray: MLMultiArray) -> UIImage! {
         //写真サイズを入力画像サイズにリサイズ
         let inputImage = self.resizeImage(image, size: CGSize(width:256, height:256))!
@@ -215,9 +212,9 @@ class StyleTransferViewController: UIViewController, UINavigationControllerDeleg
         //CVPixelBufferの生成
         var pixelBuffer: CVPixelBuffer?
         let attrs = [kCVPixelBufferCGImageCompatibilityKey: kCFBooleanTrue,
-            kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
+                     kCVPixelBufferCGBitmapContextCompatibilityKey: kCFBooleanTrue] as CFDictionary
         CVPixelBufferCreate(kCFAllocatorDefault, width, height,
-            kCVPixelFormatType_32BGRA, attrs, &pixelBuffer)
+                            kCVPixelFormatType_32BGRA, attrs, &pixelBuffer)
 
         //CVPixelBufferにCIImageを描画
         let context = CIContext()

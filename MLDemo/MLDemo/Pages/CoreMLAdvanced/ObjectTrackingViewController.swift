@@ -12,7 +12,6 @@ import Vision
 
 class ObjectTrackingViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate,
 UIGestureRecognizerDelegate {
-
     lazy var drawView: ObjectTrackingDrawView = {
         let view = ObjectTrackingDrawView()
         return view
@@ -20,12 +19,11 @@ UIGestureRecognizerDelegate {
 
     var previewLayer: AVCaptureVideoPreviewLayer!
 
-    //(3)シーケンスリクエストハンドラの生成
+    //シーケンスリクエストハンドラの生成
     var handler = VNSequenceRequestHandler()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureViews()
 
         //タップジェスチャーの追加
@@ -50,10 +48,7 @@ UIGestureRecognizerDelegate {
         view.addSubview(drawView)
     }
 
-    //====================
-     //イベント
-     //====================
-    //(2)タップ時に呼ばれる
+    //タップ時に呼ばれる
     @objc func onTapped(_ sender: UITapGestureRecognizer) {
         //画面の座標系のターゲット領域
         let position = sender.location(in: self.drawView)
@@ -69,7 +64,7 @@ UIGestureRecognizerDelegate {
         self.drawView.target = VNDetectedObjectObservation(boundingBox: rect)
     }
 
-    //(3)ロングプレス時に呼ばれる
+    //ロングプレス時に呼ばれる
     @objc func onLongPressed(_ sender: Any) {
         DispatchQueue.main.async {
             //ターゲットの解除
@@ -80,23 +75,15 @@ UIGestureRecognizerDelegate {
         }
     }
 
-
-//====================
-//アラート
-//====================
     //アラートの表示
     func showAlert(_ text: String!) {
         let alert = UIAlertController(title: text, message: nil,
-            preferredStyle: UIAlertController.Style.alert)
+                                      preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK",
-            style: UIAlertAction.Style.default, handler: nil))
+                                      style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
-
-//====================
-//カメラキャプチャ
-//====================
     //カメラキャプチャの開始
     func startCapture() {
         //セッションの初期化
@@ -145,16 +132,11 @@ UIGestureRecognizerDelegate {
 
     //カメラキャプチャの取得時に呼ばれる
     func captureOutput(_ output: AVCaptureOutput,
-        didOutput sampleBuffer: CMSampleBuffer,
-        from connection: AVCaptureConnection) {
+                       didOutput sampleBuffer: CMSampleBuffer,
+                       from connection: AVCaptureConnection) {
         predict(sampleBuffer)
     }
 
-
-//====================
-//物体移動トラッキング
-//====================
-    //(1)予測
     func predict(_ sampleBuffer: CMSampleBuffer) {
         //画像サイズの指定
         DispatchQueue.main.async {
@@ -167,7 +149,7 @@ UIGestureRecognizerDelegate {
         //リクエストの生成
         if (self.drawView.target == nil) {return}
         let request = VNTrackObjectRequest(
-            detectedObjectObservation: self.drawView.target) {
+        detectedObjectObservation: self.drawView.target) {
             request, error in
             //エラー処理
             if error != nil {

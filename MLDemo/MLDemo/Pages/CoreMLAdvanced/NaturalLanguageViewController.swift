@@ -9,7 +9,7 @@
 import UIKit
 import CoreML
 import Vision
-import NaturalLanguage //(1)
+import NaturalLanguage
 
 class NaturalLanguageViewController: UIViewController, UITextViewDelegate {
     lazy var textView: UITextView = {
@@ -48,9 +48,9 @@ class NaturalLanguageViewController: UIViewController, UITextViewDelegate {
         view.addSubview(segmentedControl)
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-        segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
-        segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
+            segmentedControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 8),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
         ])
 
         textView.layer.borderColor = UIColor.black.cgColor
@@ -98,9 +98,6 @@ class NaturalLanguageViewController: UIViewController, UITextViewDelegate {
         return true;
     }
 
-    //====================
-    //自然言語処理
-    //====================
     //自然言語処理の実行
     func analyze() {
         if self.textView.text == nil || self.textView.text!.isEmpty {return}
@@ -163,11 +160,11 @@ class NaturalLanguageViewController: UIViewController, UITextViewDelegate {
         //品詞タグ付けの実行
         let options: NLTagger.Options = [.omitPunctuation, .omitWhitespace]
         tagger.enumerateTags(in: text.startIndex..<text.endIndex,
-            unit: .word, scheme: .lexicalClass, options: options) {
-            tag, tokenRange in
-            self.resultLabel.text =
-                self.resultLabel.text!+text[tokenRange]+" : "+tag!.rawValue+"\n"
-            return true
+                             unit: .word, scheme: .lexicalClass, options: options) {
+                                tag, tokenRange in
+                                self.resultLabel.text =
+                                    self.resultLabel.text!+text[tokenRange]+" : "+tag!.rawValue+"\n"
+                                return true
         }
     }
 
@@ -182,13 +179,13 @@ class NaturalLanguageViewController: UIViewController, UITextViewDelegate {
 
         //レンマ化の実行
         tagger.enumerateTags(in: text.startIndex..<text.endIndex,
-            unit: .word, scheme: .lemma, options: options) {
-            tag, tokenRange in
-            if tag != nil {
-                self.resultLabel.text =
-                    self.resultLabel.text!+text[tokenRange]+" : "+tag!.rawValue+"\n"
-            }
-            return true
+                             unit: .word, scheme: .lemma, options: options) {
+                                tag, tokenRange in
+                                if tag != nil {
+                                    self.resultLabel.text =
+                                        self.resultLabel.text!+text[tokenRange]+" : "+tag!.rawValue+"\n"
+                                }
+                                return true
         }
     }
 
@@ -203,14 +200,14 @@ class NaturalLanguageViewController: UIViewController, UITextViewDelegate {
 
         //固有表現抽出の実行
         tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word,
-            scheme: .nameType, options: options) {
-            tag, tokenRange in
-            let tags: [NLTag] = [.personalName, .placeName, .organizationName]
-            if let tag = tag, tags.contains(tag) {
-                self.resultLabel.text =
-                    self.resultLabel.text!+text[tokenRange]+" : "+tag.rawValue+"\n"
-            }
-            return true
+                             scheme: .nameType, options: options) {
+                                tag, tokenRange in
+                                let tags: [NLTag] = [.personalName, .placeName, .organizationName]
+                                if let tag = tag, tags.contains(tag) {
+                                    self.resultLabel.text =
+                                        self.resultLabel.text!+text[tokenRange]+" : "+tag.rawValue+"\n"
+                                }
+                                return true
         }
     }
 }

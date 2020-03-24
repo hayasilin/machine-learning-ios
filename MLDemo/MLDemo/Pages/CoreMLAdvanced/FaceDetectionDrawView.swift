@@ -20,11 +20,11 @@ class FaceDetectionDrawView: UIView {
 
     //画像サイズの指定
     func setImageSize(_ imageSize: CGSize) {
-        //(2)画像の表示領域の計算（AspectFill）
+        //画像の表示領域の計算（AspectFill）
         let scale: CGFloat =
             (self.frame.width/imageSize.width > self.frame.height/imageSize.height) ?
-            self.frame.width/imageSize.width :
-            self.frame.height/imageSize.height
+                self.frame.width/imageSize.width :
+                self.frame.height/imageSize.height
         let dw: CGFloat = imageSize.width*scale
         let dh: CGFloat = imageSize.height*scale
         self.imageRect = CGRect(
@@ -33,7 +33,7 @@ class FaceDetectionDrawView: UIView {
             width: dw, height: dh)
     }
 
-    //(3)検出結果の描画
+    //検出結果の描画
     override func draw(_ rect: CGRect) {
         if self.faces == nil {return}
 
@@ -80,7 +80,7 @@ class FaceDetectionDrawView: UIView {
             height: rect.height * self.imageRect.height)
     }
 
-    //(4)検出結果の座標系を画面の座標系に変換
+    //検出結果の座標系を画面の座標系に変換
     func convertPoint(_ point:CGPoint, rect:CGRect) -> CGPoint {
         return CGPoint(
             x: rect.minX + point.x * rect.size.width,

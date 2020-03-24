@@ -34,6 +34,10 @@ class ImageClassificationViewController: UIViewController {
         }
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        showActionSheet()
+    }
+
     func configureViews() {
         let cameraBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(showActionSheet))
         navigationItem.rightBarButtonItem = cameraBarButtonItem

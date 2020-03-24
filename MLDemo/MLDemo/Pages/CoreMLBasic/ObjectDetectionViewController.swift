@@ -23,12 +23,10 @@ class ObjectDetectionViewController: UIViewController, UINavigationControllerDel
         return drawView
     }()
 
-    //モデル
     var model = try! VNCoreMLModel(for: ObjectDetection().model)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         configureViews()
 
         if self.imageView.image == nil {
@@ -36,7 +34,14 @@ class ObjectDetectionViewController: UIViewController, UINavigationControllerDel
         }
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        showActionSheet()
+    }
+
     func configureViews() {
+        let cameraBarButtonItem = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(showActionSheet))
+        navigationItem.rightBarButtonItem = cameraBarButtonItem
+
         imageView.frame = view.bounds
         imageView.backgroundColor = .groupTableViewBackground
         view.addSubview(imageView)
@@ -46,13 +51,9 @@ class ObjectDetectionViewController: UIViewController, UINavigationControllerDel
         view.addSubview(drawView)
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        showActionSheet()
-    }
-
-    func showActionSheet() {
+    @objc func showActionSheet() {
         let actionSheet = UIAlertController(title: nil, message: nil,
-            preferredStyle: .actionSheet)
+                                            preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "カメラ", style: .default) {
             action in
             self.openPicker(sourceType: .camera)
@@ -67,9 +68,9 @@ class ObjectDetectionViewController: UIViewController, UINavigationControllerDel
 
     func showAlert(_ text: String!) {
         let alert = UIAlertController(title: text, message: nil,
-            preferredStyle: UIAlertController.Style.alert)
+                                      preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK",
-            style: UIAlertAction.Style.default, handler: nil))
+                                      style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
@@ -82,7 +83,7 @@ class ObjectDetectionViewController: UIViewController, UINavigationControllerDel
 
     //イメージピッカーのイメージ取得時に呼ばれる
     func imagePickerController(_ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         //イメージの取得
         var image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
 
@@ -109,10 +110,6 @@ class ObjectDetectionViewController: UIViewController, UINavigationControllerDel
         picker.presentingViewController!.dismiss(animated:true, completion:nil)
     }
 
-
-    //====================
-    //物体検出
-    //====================
     func predict(_ image: UIImage) {
         //リクエストの生成
         let request = VNCoreMLRequest(model: self.model) {

@@ -53,7 +53,7 @@ class ActivityClassificationViewController: UIViewController, UINavigationContro
         self.motionManager = CMMotionManager()
         guard let motionManager = self.motionManager,
             motionManager.isAccelerometerAvailable &&
-            motionManager.isGyroAvailable else {return}
+                motionManager.isGyroAvailable else {return}
         motionManager.deviceMotionUpdateInterval = ActivityClassificationViewController.sensorsUpdateInterval
         motionManager.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler:{
             deviceManager, error in
@@ -77,9 +77,6 @@ class ActivityClassificationViewController: UIViewController, UINavigationContro
         ])
     }
 
-    //====================
-    //センサー
-    //====================
     //(5)センサー情報の更新時に呼ばれる
     func onUpdateSensorInfo(_ deviceManager: CMDeviceMotion!) {
         //センサー情報の取得
@@ -107,23 +104,15 @@ class ActivityClassificationViewController: UIViewController, UINavigationContro
         }
     }
 
-
-//====================
-//アラート
-//====================
     //アラートの表示
     func showAlert(_ text: String!) {
         let alert = UIAlertController(title: text, message: nil,
-            preferredStyle: UIAlertController.Style.alert)
+                                      preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "OK",
-            style: UIAlertAction.Style.default, handler: nil))
+                                      style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
 
-
-//====================
-//活動分類
-//====================
     //予測
     func predict() {
         //予測

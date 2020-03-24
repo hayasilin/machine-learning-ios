@@ -14,10 +14,10 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
 
         let coreMLBasicVC = CoreMLBasicViewController()
-        coreMLBasicVC.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 0)
+        coreMLBasicVC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
 
         let coreMLAdvancedVC = CoreMLAdvancedViewController()
-        coreMLAdvancedVC.tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 1)
+        coreMLAdvancedVC.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 1)
 
         viewControllers = [coreMLBasicVC, coreMLAdvancedVC]
     }
